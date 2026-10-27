@@ -13,8 +13,14 @@ export function AddTaskModal({isOpen, onClose, onSave}){
                     placeholder="Enter a todo"
                     value={task}
                     onInput={(e) => setTask(e.currentTarget.value)}
+                    onKeyDown={
+                        (e) => {
+                            if (e.key === "Enter") onSave(task);
+                        }
+                    }
                 />
-                <button onClick={() => { onSave(task); setTask("") }}>Add</button>
+
+                <button onClick={() =>  onSave(task) }>Add</button>
                 <button onClick={onClose}>Cancel</button>
             </div>
         </div>

@@ -13,3 +13,9 @@
     padding: 1rem 2rem;
     list-style-type: none;
 }
+
+.todo li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

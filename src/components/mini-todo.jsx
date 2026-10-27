@@ -30,14 +30,20 @@ export function MiniTodo(){
             <h1>My Todo list!</h1>
             <ul>
                 {todos.map((todo, index) => (
-                    <li key={todo.id}>{index + 1}. {todo.text}</li>
+                    <li key={todo.id}>
+                        <span>{index + 1}. {todo.text}</span>
+                        <button>X</button>
+                    </li>
                 ))}
             </ul>
-            <AddTaskModal
-                isOpen={modalIsVisible}
-                onClose={() => setModalVisibility(false)}
-                onSave={addTodo}
-            />
+
+            { modalIsVisible &&
+                <AddTaskModal
+                    isOpen={modalIsVisible}
+                    onClose={() => setModalVisibility(false)}
+                    onSave={addTodo}
+                />
+            }
         </div>
     )
 }
