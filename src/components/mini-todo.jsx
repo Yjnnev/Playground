@@ -1,15 +1,43 @@
 
 import { useState } from "preact/hooks";
+import { AddTaskModal } from "./AddTaskModal";
+import "./mini-todo.css"
+
 
 export function MiniTodo(){
-    const [todos, setTodos] = useState(["Learn Preact", "Drink Water"]);
-    const [input, setInput] = useState("");
+    const [todos, setTodos] = useState([
+        {id: 1, text: "Learn Preact"}, 
+        {id: 2, text: "Drink Water"}
+    ]);
 
-    // Todos
+    const [modalIsVisible, setModalVisibility] = useState(false);
+
+    function addTodo(text){
+        const trimmed = text.trim();
+        const newTodo = { 
+            id: Date.now(),
+            text: trimmed
+        }
+
+        if (trimmed !== "") 
+            setTodos([...todos, newTodo]);
+        setModalVisibility(false);
+    }
 
     return (
-        <div>
-            Hai
+        <div className="todo">
+            <button onClick={() => setModalVisibility(true)}>Add</button>
+            <h1>My Todo list!</h1>
+            <ul>
+                {todos.map((todo, index) => (
+                    <li key={todo.id}>{index + 1}. {todo.text}</li>
+                ))}
+            </ul>
+            <AddTaskModal
+                isOpen={modalIsVisible}
+                onClose={() => setModalVisibility(false)}
+                onSave={addTodo}
+            />
         </div>
     )
 }

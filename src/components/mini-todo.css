@@ -1,0 +1,15 @@
+
+.todo {
+    display: flex;
+    align-items: left;
+    flex-direction: column;
+}
+
+.todo h1 {
+    padding: 0 1rem;
+}
+
+.todo ul {
+    padding: 1rem 2rem;
+    list-style-type: none;
+}
