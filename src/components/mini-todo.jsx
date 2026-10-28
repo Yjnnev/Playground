@@ -24,6 +24,12 @@ export function MiniTodo(){
         setModalVisibility(false);
     }
 
+    function deleteTodo(textID){
+        setTodos(todos.filter(
+            (todo) => { return todo.id !== textID }
+        ));
+    }
+
     return (
         <div className="todo">
             <button onClick={() => setModalVisibility(true)}>Add</button>
@@ -32,14 +38,13 @@ export function MiniTodo(){
                 {todos.map((todo, index) => (
                     <li key={todo.id}>
                         <span>{index + 1}. {todo.text}</span>
-                        <button>X</button>
+                        <button onClick={() => deleteTodo(todo.id)}>X</button>
                     </li>
                 ))}
             </ul>
 
             { modalIsVisible &&
                 <AddTaskModal
-                    isOpen={modalIsVisible}
                     onClose={() => setModalVisibility(false)}
                     onSave={addTodo}
                 />

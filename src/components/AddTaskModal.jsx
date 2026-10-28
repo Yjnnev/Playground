@@ -1,15 +1,20 @@
 
-import { useState } from "preact/hooks";
+import { useState, useRef, useEffect } from "preact/hooks";
 import "./AddTaskModal.css"
 
-export function AddTaskModal({isOpen, onClose, onSave}){
+export function AddTaskModal({onClose, onSave}){
     const [task, setTask] = useState("");
+    const inputRef = useRef(null);
 
-    if (!isOpen) return null;
-    else return (
+    useEffect(
+        () => inputRef.current.focus(), []
+    );
+
+    return (
         <div className="overlay">
             <div className="modal">
                 <input 
+                    ref={inputRef}
                     placeholder="Enter a todo"
                     value={task}
                     onInput={(e) => setTask(e.currentTarget.value)}
