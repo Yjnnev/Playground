@@ -30,17 +30,24 @@ export function MiniTodo(){
         ));
     }
 
+    function generateList(){
+        if (todos.length === 0) 
+            return <li>You dont have any tasks! Great!</li>   
+        else 
+            return todos.map((todo, index) => (
+            <li key={todo.id}>
+                <span>{index + 1}. {todo.text}</span>
+                <button onClick={() => deleteTodo(todo.id)}>X</button>
+            </li>
+        ))
+    }
+
     return (
         <div className="todo">
             <button onClick={() => setModalVisibility(true)}>Add</button>
             <h1>My Todo list!</h1>
             <ul>
-                {todos.map((todo, index) => (
-                    <li key={todo.id}>
-                        <span>{index + 1}. {todo.text}</span>
-                        <button onClick={() => deleteTodo(todo.id)}>X</button>
-                    </li>
-                ))}
+                { generateList() }
             </ul>
 
             { modalIsVisible &&
